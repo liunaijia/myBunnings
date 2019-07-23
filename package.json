@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start-crawler": "webpack --config webpack-crawler.config.js --mode development --watch"
   },
   "keywords": [],
   "author": "",
@@ -12,6 +12,7 @@
   "dependencies": {
     "@rematch/core": "^1.1.0",
     "@rematch/select": "^2.0.4",
+    "cheerio": "^1.0.0-rc.3",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",

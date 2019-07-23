@@ -18,6 +18,7 @@ module.exports = {
     // 'react-hooks/rules-of-hooks': 'error',
     'jsx-a11y/no-static-element-interactions': 'off',
     'jsx-a11y/click-events-have-key-events': 'off',
+    'no-restricted-syntax': 'off'
   },
   // settings: {
   //   'import/resolver': {

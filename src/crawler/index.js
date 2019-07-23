@@ -1,4 +1,7 @@
-import getCategories from './getCategories';
+import getCategoryUrls from './getCategories';
 
-const data = getCategories();
-console.log(data);
+(async () => {
+  for await (const url of getCategoryUrls()) {
+    console.log(url);
+  }
+})();
