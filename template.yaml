@@ -1,0 +1,57 @@
+# The AWS::Serverless transform, which is a macro hosted by AWS CloudFormation, takes an entire template written in the AWS Serverless Application Model (AWS SAM) syntax and transforms and expands it into a compliant AWS CloudFormation template.
+# https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md
+Transform: AWS::Serverless-2016-10-31
+
+# Globals is a section in your SAM template to define properties common to all your Serverless Function and APIs. All the AWS::Serverless::Function and AWS::Serverless::Api resources will inherit the properties defined here.
+Globals:
+  Function:
+    Runtime: nodejs10.x
+    Handler: index.default # export handler function as default from index.js file
+    Timeout: 10
+    # Environment:
+    #   Variables:
+    #     MyBunningsTable: !Ref MyBunningsTable
+    # user default here?
+
+Resources:
+  MyBunningsApi:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: .aws-sam/build/fetchProducts
+      Events:
+        Api: # API name
+          Type: Api
+          Properties:
+            Path: /products
+            Method: POST
+  #     Policies:
+  #       - DynamoDBCrudPolicy:
+  #           TableName: !Ref MyBunningsTable
+
+  # MyBunningsTable:
+  #   Type: AWS::DynamoDB::Table
+  #   Properties:
+  #     AttributeDefinitions:
+  #       -
+  #         AttributeName: day
+  #         AttributeType: S
+  #       -
+  #         AttributeName: stockCode
+  #         AttributeType: S
+  #     KeySchema:
+  #       -
+  #         AttributeName: stockCode
+  #         KeyType: HASH
+  #       -
+  #         AttributeName: day
+  #         KeyType: RANGE
+  #     ProvisionedThroughput:
+  #       ReadCapacityUnits: 1
+  #       WriteCapacityUnits: 1
+
+  # ApiDependencies:
+  #   Type: AWS::Serverless::LayerVersion
+  #   Properties:
+  #     Description: Dependencies for API
+  #     ContentUri: .aws-sam/build/vendors
+  #     RetentionPolicy: Delete

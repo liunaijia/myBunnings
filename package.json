@@ -4,7 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start-crawler": "webpack --config webpack-crawler.config.js --mode development --watch"
+    "dev:api:webpack": "webpack --config webpack-api.config.js --mode development --watch",
+    "dev:api:sam": "sam local start-api",
+    "dev:api": "run-p dev:api:*",
+    "deploy:api": "run-s deploy:api:clean-build deploy:api:build deploy:api:upload-package deploy:api:deploy-stack",
+    "deploy:api:clean-build": "rm -rf ./.aws-sam",
+    "deploy:api:build": "webpack --config webpack-api.config.js --mode production",
+    "deploy:api:upload-package": "sam package --output-template-file ./.aws-sam/template.yaml --s3-bucket mybunnings --s3-prefix packages",
+    "deploy:api:deploy-stack": "sam deploy --template-file ./.aws-sam/template.yaml --stack-name mybunnings --capabilities CAPABILITY_IAM"
   },
   "keywords": [],
   "author": "",
@@ -12,6 +19,7 @@
   "dependencies": {
     "@rematch/core": "^1.1.0",
     "@rematch/select": "^2.0.4",
+    "aws-sdk": "^2.490.0",
     "cheerio": "^1.0.0-rc.3",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
