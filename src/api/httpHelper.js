@@ -50,7 +50,7 @@ export function respond(fn) {
       callback(null, {
         statusCode: status || 500,
         body: JSON.stringify(body || {
-          Error: error.message || error,
+          Error: error,
           Reference: context.awsRequestId,
         }),
         ...createHeaders(setCookieHeader(cookie)),
