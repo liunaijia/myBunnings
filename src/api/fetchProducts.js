@@ -25,14 +25,14 @@ export default respond(async (event) => {
       // get product
       const output = await client.get({
         TableName: tableName,
-        Key: { fineLine },
+        Key: { entityType: 'product', entityId: fineLine },
       }).promise();
       if (output.Item) {
         if (output.Item.price !== product.price) {
           // update product price
           await client.update({
             TableName: tableName,
-            Key: { fineLine },
+            Key: { entityType: 'product', entityId: fineLine },
             UpdateExpression: `set
               #price = :price,
               #priceChange = :priceChange
@@ -61,7 +61,8 @@ export default respond(async (event) => {
         await client.put({
           TableName: tableName,
           Item: {
-            fineLine,
+            entityType: 'product',
+            entityId: fineLine,
             price,
             priceChange: 0,
             timestamp: now,

@@ -5,6 +5,7 @@ module.exports = createConfig({
   target: 'node',
   entry: {
     fetchProducts: './src/api/fetchProducts',
+    getSpecials: './src/api/getSpecials',
   },
   output: {
     path: path.resolve(__dirname, '.aws-sam/build'),
