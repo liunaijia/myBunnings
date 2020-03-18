@@ -10,66 +10,19 @@ Globals:
     Timeout: 30
     Environment:
       Variables:
-        MyBunningsTable: !Ref MyBunningsTableV2
     # user default here?
 
 
 Resources:
-  FetchProducts:
+  GetPriceHistory:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: .aws-sam/build/fetchProducts
+      CodeUri: .aws-sam/build/getPriceHistory
       Events:
         Api: # API name
           Type: Api
           Properties:
-            Path: /products
-            Method: POST
-      Policies:
-        - DynamoDBCrudPolicy:
-            TableName: !Ref MyBunningsTableV2
-  GetSpecials:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: .aws-sam/build/getSpecials
-      Events:
-        Api: # API name
-          Type: Api
-          Properties:
-            Path: /specials
+            Path: /price
             Method: GET
-      Policies:
-        - DynamoDBCrudPolicy:
-            TableName: !Ref MyBunningsTableV2
 
-  MyBunningsTableV2:
-    Type: AWS::DynamoDB::Table
-    Properties:
-      AttributeDefinitions:
-        - AttributeName: entityType
-          AttributeType: S
-        - AttributeName: entityId
-          AttributeType: S
-        - AttributeName: priceChange
-          AttributeType: N
-      KeySchema:
-        - AttributeName: entityId
-          KeyType: HASH
-        - AttributeName: entityType
-          KeyType: RANGE
-      ProvisionedThroughput:
-        ReadCapacityUnits: 1
-        WriteCapacityUnits: 1
-      GlobalSecondaryIndexes:
-        - IndexName: PriceChangeIndexV2
-          KeySchema:
-            - AttributeName: entityType
-              KeyType: HASH
-            - AttributeName: priceChange
-              KeyType: RANGE
-          Projection:
-            ProjectionType: INCLUDE
-            NonKeyAttributes: [price, timestamp, displayName, productUrl, productImage]
-          ProvisionedThroughput:
-            ReadCapacityUnits: 1
-            WriteCapacityUnits: 1
+  

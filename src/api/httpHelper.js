@@ -44,6 +44,8 @@ export function respond(fn) {
         statusCode: status || 200,
         body: JSON.stringify(body),
         ...createHeaders(setCookieHeader(cookie)),
+        // body,
+        // ...createHeaders({ ...setCookieHeader(cookie), 'content-type': 'text/html; charset=UTF-8' }),
       });
     } catch (error) {
       const { status, body, cookie } = error;
