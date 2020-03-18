@@ -1,4 +1,5 @@
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const { RESOLVE_EXTENSIONS } = require('./const');
 
 const ENABLE_BUNDLE_ANALYZER = process.env.ANALYZE;
 
@@ -24,9 +25,9 @@ const merge = (...args) => args.reduce(
 
 const baseConfig = (env, argv) => ({
   devtool: argv.mode === 'production' ? 'none' : 'source-map',
-  // resolve: {
-  //   extensions: 'js',
-  // },
+  resolve: {
+    extensions: RESOLVE_EXTENSIONS,
+  },
   module: {
     rules: [
       {
