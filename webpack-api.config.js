@@ -4,7 +4,7 @@ const createConfig = require('./webpack-base.config');
 module.exports = createConfig({
   target: 'node',
   entry: {
-    getPriceHistory: './src/api/getPriceHistory',
+    searchProducts: './src/api/searchProducts',
   },
   output: {
     path: path.resolve(__dirname, '.aws-sam/build'),

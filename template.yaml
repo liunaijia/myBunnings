@@ -14,15 +14,15 @@ Globals:
 
 
 Resources:
-  GetPriceHistory:
+  SearchProducts:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: .aws-sam/build/getPriceHistory
+      CodeUri: .aws-sam/build/searchProducts
       Events:
         Api: # API name
           Type: Api
           Properties:
-            Path: /price
+            Path: /products
             Method: GET
 
   
