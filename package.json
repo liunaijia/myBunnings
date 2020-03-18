@@ -24,9 +24,11 @@
   "license": "ISC",
   "dependencies": {
     "aws-sdk": "^2.641.0",
+    "chart.js": "^2.9.3",
     "cheerio": "^1.0.0-rc.3",
     "prop-types": "^15.7.2",
     "react": "^16.13.0",
+    "react-chartjs-2": "^2.9.0",
     "react-dom": "^16.13.0",
     "react-hot-loader": "^4.12.20",
     "styled-components": "^4.4.1"
