@@ -8,13 +8,13 @@ function SearchBox({ onSubmit }) {
 
   function handleSubmit() {
     if (onSubmit) {
-      onSubmit({ target: { value: formValue } });
+      onSubmit({ target: { value: formValue.barcode } });
     }
   }
 
   return (
     <Form value={formValue} onChange={handleFormChange}>
-      <Input name="barcode" placeholder="bardcode" />
+      <Input name="barcode" placeholder="Bardcode" />
       <input type="submit" onClick={handleSubmit} />
     </Form>
   );
