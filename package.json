@@ -23,7 +23,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@zxing/library": "^0.16.0",
     "aws-sdk": "^2.642.0",
     "chart.js": "^2.9.3",
     "cheerio": "^1.0.0-rc.3",
