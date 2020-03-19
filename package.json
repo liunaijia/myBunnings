@@ -23,9 +23,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@chakra-ui/core": "^0.6.1",
+    "@emotion/core": "^10.0.28",
+    "@emotion/styled": "^10.0.27",
     "aws-sdk": "^2.642.0",
     "chart.js": "^2.9.3",
     "cheerio": "^1.0.0-rc.3",
+    "emotion-theming": "^10.0.27",
     "prop-types": "^15.7.2",
     "react": "^16.13.0",
     "react-chartjs-2": "^2.9.0",
