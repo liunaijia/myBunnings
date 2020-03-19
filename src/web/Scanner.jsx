@@ -16,6 +16,7 @@ function Scanner({ onScanned, onError }) {
         if (onError) {
           onError(error);
         }
+        throw error;
       }
     })();
     return () => codeReader.reset();
