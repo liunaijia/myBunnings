@@ -8,8 +8,8 @@ Globals:
     Runtime: nodejs12.x
     Handler: index.default # export handler function as default from index.js file
     Timeout: 30
-    Environment:
-      Variables:
+    # Environment:
+      # Variables:
     # user default here?
 
 
