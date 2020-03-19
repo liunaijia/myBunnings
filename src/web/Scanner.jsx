@@ -22,11 +22,14 @@ function Scanner({ onScanned, onError }) {
   }, []);
 
   return (
-    <video
-      width="100%"
-      height="50%"
-      ref={video}
-    />
+    <>
+      Scanning
+      <video
+        width="100%"
+        height="50%"
+        ref={video}
+      />
+    </>
   );
 }
 

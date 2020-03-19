@@ -7,14 +7,25 @@ import Scanner from './Scanner';
 
 function Home({ className }) {
   const history = useHistory();
+  const [error, setError] = useState();
 
   async function handleSearchSubmit(event) {
     history.push(`/products?barcode=${event.target.value}`);
   }
 
+  function handleError(error) {
+    setError(error);
+  }
+
+  if (error) {
+    return (
+      error.toString()
+    );
+  }
+
   return (
     <>
-      <Scanner onScanned={handleSearchSubmit} />
+      <Scanner onScanned={handleSearchSubmit} onError={handleError} />
       {/* <SearchBox onSubmit={handleSearchSubmit} /> */}
 
     </>

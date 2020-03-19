@@ -11,6 +11,9 @@ function App({ className }) {
       <main className={className}>
         <Router />
       </main>
+      <footer>
+        By Naijia
+      </footer>
     </>
   );
 }
