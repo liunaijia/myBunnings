@@ -2,7 +2,8 @@ import React from 'react';
 import {
   string, arrayOf, shape, number,
 } from 'prop-types';
-import { Grid, Box } from './components';
+import { Link } from 'react-router-dom';
+import { Flex, Box } from './components';
 
 function ProductList({ items, className }) {
   function handleItemClick(item) {
@@ -14,19 +15,21 @@ function ProductList({ items, className }) {
     };
   }
   return (
-    <Grid templateColumns="repeat(1, 1fr)" gap={1} className={className}>
+    <Flex className={className} direction="column">
       {items.map(item => (
-        <Box color="white" key={item.id} onClick={handleItemClick(item)}>
-          <img src={item.image} alt={item.name} />
-          <div dangerouslySetInnerHTML={{ __html: item.name_highlighted }} />
-          <div>
-            {item.price}
-            {' '}
-            {item.priceDiff > 0 ? item.priceDiff : ''}
-          </div>
-        </Box>
+        <Flex key={item.id} onClick={handleItemClick(item)}>
+          <img src={item.image} alt={item.name} flex="auto" />
+          <Flex>
+            <Link dangerouslySetInnerHTML={{ __html: item.name_highlighted }} to={`/products/${item.id}`} />
+            <div>
+              {item.price}
+              {' '}
+              {item.priceDiff > 0 ? item.priceDiff : ''}
+            </div>
+          </Flex>
+        </Flex>
       ))}
-    </Grid>
+    </Flex>
   );
 }
 

@@ -1,32 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { string } from 'prop-types';
 import styled from 'styled-components';
-import {
-  ErrorBoundary,
-} from './components';
 import GlobalStyle from './App.css';
-import SearchBox from './SearchBox';
-import ProductName from './ProductName';
-import ProductList from './ProductList';
+import Router from './Router';
 
 function App({ className }) {
-  const [searchResult, setSearchResult] = useState();
-
-  async function handleSearchSubmit(event) {
-    const response = await fetch(`http://localhost:3000/price?q=${event.target.value.barcode}`);
-    const data = await response.json();
-    setSearchResult(data);
-  }
-
-  console.log(searchResult);
-
   return (
     <>
       <GlobalStyle />
       <main className={className}>
-        <SearchBox onSubmit={handleSearchSubmit} />
-        {searchResult && <ProductName value={searchResult.matchedProductName} />}
-        {searchResult && <ProductList items={searchResult.matchedProducts.products} />}
+        <Router />
       </main>
     </>
   );
