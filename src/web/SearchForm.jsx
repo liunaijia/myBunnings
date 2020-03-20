@@ -7,11 +7,12 @@ import { useForm, Form } from './components';
 
 function SearchForm({ onSubmit }) {
   const [inputType, setInputType] = useState('barcode');
-  const [formValue, handleFormChange] = useForm();
+  const [formValue, handleFormChange] = useForm({ q: '' });
 
   function handleSubmit() {
-    if (onSubmit) {
-      onSubmit({ target: { value: formValue.q } });
+    const value = formValue.q;
+    if (onSubmit && value) {
+      onSubmit({ target: { value } });
     }
   }
 
@@ -27,7 +28,7 @@ function SearchForm({ onSubmit }) {
             <Box className="material-icons">{inputType === 'barcode' ? 'texture' : 'text_fields'}</Box>
           </InputLeftAddon>
           <Form value={formValue} onChange={handleFormChange}>
-            <Input name="q" placeholder={inputType === 'barcode' ? 'Barcode' : 'Anything'} pattern={inputType === 'barcode' ? '\\d*' : '*'} size="lg" autoFocus />
+            <Input name="q" placeholder={inputType === 'barcode' ? 'Barcode' : 'Anything'} pattern={inputType === 'barcode' ? '\\d*' : undefined} size="lg" autoFocus />
           </Form>
         </InputGroup>
         <Button type="submit" leftIcon="search" w="100%" size="lg">Search</Button>
