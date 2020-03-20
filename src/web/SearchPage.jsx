@@ -14,14 +14,17 @@ function SearchPage() {
   const sort = searchParams.get('sort');
 
   const [searchResult, setSearchResult] = useState();
+  const [isSearching, setInSearching] = useState(false);
 
   const history = useHistory();
 
   useEffect(() => {
     if (query) {
       (async () => {
+        setInSearching(true);
         const result = await findProducts(query, { sort });
         setSearchResult(result);
+        setInSearching(false);
       })();
     }
   }, [query, sort]);
@@ -30,21 +33,20 @@ function SearchPage() {
     history.push(`/search?${toQueryString(event.target.value)}`);
   }
 
-  if (searchResult) {
-    return (
-      <>
-        <SearchHeader onSubmit={handleSubmit} query={query} sort={sort} />
-        <Stack spacing={4}>
-          <ProductList items={searchResult.matchedProducts.products} />
-        </Stack>
-      </>
-    );
-  }
   return (
-    <Flex align="center" justify="center" h="100vh">
-      <Progress hasStripe isAnimated value={100} size="lg" w="80%" />
-    </Flex>
+    <>
+      <SearchHeader onSubmit={handleSubmit} query={query} sort={sort} />
+      {isSearching && (
+        <Progress hasStripe isAnimated value={100} mt="-12px" />
+      )}
+      <Stack spacing={4}>
+        {searchResult && (
+        <ProductList items={searchResult.matchedProducts.products} />
+        )}
+      </Stack>
+    </>
   );
 }
+
 
 export default SearchPage;

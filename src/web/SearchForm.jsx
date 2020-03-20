@@ -9,7 +9,10 @@ function SearchForm({ onSubmit }) {
   const [inputType, setInputType] = useState('barcode');
   const [formValue, handleFormChange] = useForm({ q: '' });
 
-  function handleSubmit() {
+  function handleSubmit(event) {
+    event.preventDefault();
+    event.stopPropagation();
+
     const value = formValue.q;
     if (onSubmit && value) {
       onSubmit({ target: { value } });

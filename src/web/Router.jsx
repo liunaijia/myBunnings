@@ -8,7 +8,7 @@ function Router() {
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route exact path="/search" component={SearchPage} />
+        <Route path="/search" component={SearchPage} />
       </Switch>
     </BrowserRouter>
   );
