@@ -22,6 +22,9 @@ module.exports = createConfig((env, argv) => {
         template: './src/web/index.html',
       }),
     ],
+    devServer: {
+      historyApiFallback: true,
+    },
   };
   if (argv.mode === 'development') {
     // enable hot module replacement

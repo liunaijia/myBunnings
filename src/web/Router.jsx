@@ -1,16 +1,16 @@
 import React from 'react';
-import { HashRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Home from './Home';
-import SearchResult from './SearchResult';
+import SearchPage from './SearchPage';
 
 function Router() {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route exact path="/search" component={SearchResult} />
+        <Route exact path="/search" component={SearchPage} />
       </Switch>
-    </HashRouter>
+    </BrowserRouter>
   );
 }
 
