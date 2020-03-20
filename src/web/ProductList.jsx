@@ -19,9 +19,11 @@ function ProductList({ items }) {
 
   useEffect(() => {
     (async () => {
-      const response = await fetch(`https://pricehipster.com/api/search/products/byId?id=${selectedItemId}&includeVariants=true`);
-      const data = await response.json();
-      setPriceHistory({ ...priceHistory, [selectedItemId]: data.product });
+      if (selectedItemId) {
+        const response = await fetch(`https://pricehipster.com/api/search/products/byId?id=${selectedItemId}&includeVariants=true`);
+        const data = await response.json();
+        setPriceHistory({ ...priceHistory, [selectedItemId]: data.product });
+      }
     })();
   }, [selectedItemId]);
 

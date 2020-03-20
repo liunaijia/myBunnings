@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { func } from 'prop-types';
-import { Button, Input, Stack } from '@chakra-ui/core';
+import {
+  Button, Input, Stack, InputGroup, InputLeftAddon, Box,
+} from '@chakra-ui/core';
 import { useForm, Form } from './components';
 
 function SearchForm({ onSubmit }) {
+  const [inputType, setInputType] = useState('barcode');
   const [formValue, handleFormChange] = useForm();
 
   function handleSubmit() {
@@ -12,13 +15,24 @@ function SearchForm({ onSubmit }) {
     }
   }
 
+  function handleInputTypeChange() {
+    setInputType(inputType === 'barcode' ? 'text' : 'barcode');
+  }
+
   return (
-    <Stack spacing={4}>
-      <Form value={formValue} onChange={handleFormChange}>
-        <Input type="number" name="q" placeholder="Barcode" pattern="\d*" size="lg" autoFocus />
-      </Form>
-      <Button leftIcon="search" onClick={handleSubmit} w="100%" size="lg">Search</Button>
-    </Stack>
+    <form onSubmit={handleSubmit}>
+      <Stack spacing={4}>
+        <InputGroup>
+          <InputLeftAddon onClick={handleInputTypeChange}>
+            <Box className="material-icons">{inputType === 'barcode' ? 'texture' : 'text_fields'}</Box>
+          </InputLeftAddon>
+          <Form value={formValue} onChange={handleFormChange}>
+            <Input name="q" placeholder={inputType === 'barcode' ? 'Barcode' : 'Anything'} pattern={inputType === 'barcode' ? '\\d*' : '*'} size="lg" autoFocus />
+          </Form>
+        </InputGroup>
+        <Button type="submit" leftIcon="search" w="100%" size="lg">Search</Button>
+      </Stack>
+    </form>
   );
 }
 
