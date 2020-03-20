@@ -8,14 +8,14 @@ function SearchForm({ onSubmit }) {
 
   function handleSubmit() {
     if (onSubmit) {
-      onSubmit({ target: { value: formValue.barcode } });
+      onSubmit({ target: { value: formValue.q } });
     }
   }
 
   return (
     <Stack spacing={4}>
       <Form value={formValue} onChange={handleFormChange}>
-        <Input type="number" name="barcode" placeholder="Bardcode" pattern="\d*" size="lg" autoFocus />
+        <Input type="number" name="q" placeholder="Barcode" pattern="\d*" size="lg" autoFocus />
       </Form>
       <Button leftIcon="search" onClick={handleSubmit} w="100%" size="lg">Search</Button>
     </Stack>

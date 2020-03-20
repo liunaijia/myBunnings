@@ -9,19 +9,19 @@ function SearchResult() {
   const [searchResult, setSearchResult] = useState();
 
   const query = new URLSearchParams(useLocation().search);
-  const barcode = query.get('barcode');
+  const q = query.get('q');
 
   useEffect(() => {
-    if (barcode) {
+    if (q) {
       (async () => {
         const apiEndpoint = 'https://pzqlp06kt7.execute-api.ap-southeast-2.amazonaws.com/Prod';
         // const apiEndpoint = http://localhost:3000
-        const response = await fetch(`${apiEndpoint}/products?barcode=${barcode}`);
+        const response = await fetch(`${apiEndpoint}/products?q=${q}`);
         const data = await response.json();
         setSearchResult(data);
       })();
     }
-  }, [barcode]);
+  }, [q]);
 
   if (searchResult) {
     return (
