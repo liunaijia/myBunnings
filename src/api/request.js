@@ -1,6 +1,7 @@
 import { request } from 'https';
 
 async function get(url, parser) {
+  console.log(`[GET] ${url}`);
   return new Promise((resolve, reject) => {
     const req = request(url, {
       method: 'GET',

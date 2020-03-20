@@ -4,6 +4,7 @@ import {
   Progress, Flex, Stack, Icon, Input, InputGroup, InputLeftElement,
 } from '@chakra-ui/core';
 import ProductList from './ProductList';
+import { findProducts } from './service';
 
 function SearchResult() {
   const [searchResult, setSearchResult] = useState();
@@ -12,20 +13,18 @@ function SearchResult() {
 
   const query = new URLSearchParams(useLocation().search);
   const q = query.get('q');
+  const sort = query.get('sort');
 
   const [keyword, setKeyword] = useState(q);
 
   useEffect(() => {
     if (q) {
       (async () => {
-        const apiEndpoint = 'https://lugc11fh1k.execute-api.ap-southeast-2.amazonaws.com/prod';
-        // const apiEndpoint = http://localhost:3000
-        const response = await fetch(`${apiEndpoint}/products?q=${q}`);
-        const data = await response.json();
-        setSearchResult(data);
+        const result = await findProducts(q, { sort });
+        setSearchResult(result);
       })();
     }
-  }, [q]);
+  }, [q, sort]);
 
   function handleQueryChange(event) {
     setKeyword(event.target.value);
