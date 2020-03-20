@@ -14,6 +14,12 @@ Globals:
 
 
 Resources:
+  Api:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: prod
+      EndpointConfiguration: REGIONAL
+
   SearchProducts:
     Type: AWS::Serverless::Function
     Properties:
@@ -22,6 +28,7 @@ Resources:
         Api: # API name
           Type: Api
           Properties:
+            RestApiId: !Ref Api
             Path: /products
             Method: GET
 

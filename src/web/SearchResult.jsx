@@ -14,7 +14,7 @@ function SearchResult() {
   useEffect(() => {
     if (q) {
       (async () => {
-        const apiEndpoint = 'https://pzqlp06kt7.execute-api.ap-southeast-2.amazonaws.com/Prod';
+        const apiEndpoint = 'https://lugc11fh1k.execute-api.ap-southeast-2.amazonaws.com/prod';
         // const apiEndpoint = http://localhost:3000
         const response = await fetch(`${apiEndpoint}/products?q=${q}`);
         const data = await response.json();
