@@ -1,44 +1,20 @@
-import React, { useState } from 'react';
-import { string } from 'prop-types';
-import styled from 'styled-components';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
-// import SearchBox from './SearchBox';
-import Scanner from './Scanner';
+import { Flex } from '@chakra-ui/core';
+import SearchForm from './SearchForm';
 
-function Home({ className }) {
+function Home() {
   const history = useHistory();
-  const [error, setError] = useState();
 
   async function handleSearchSubmit(event) {
     history.push(`/products?barcode=${event.target.value}`);
   }
 
-  function handleError(error) {
-    setError(error);
-  }
-
-  if (error) {
-    return (
-      error.toString()
-    );
-  }
-
   return (
-    <>
-      <Scanner onScanned={handleSearchSubmit} onError={handleError} />
-      {/* <SearchBox onSubmit={handleSearchSubmit} /> */}
-
-    </>
+    <Flex align="center" justify="center" h="100vh">
+      <SearchForm onSubmit={handleSearchSubmit} />
+    </Flex>
   );
 }
 
-Home.propTypes = {
-  className: string,
-};
-
-Home.defaultProps = {
-  className: null,
-};
-
-export default styled(Home)`
-`;
+export default Home;
