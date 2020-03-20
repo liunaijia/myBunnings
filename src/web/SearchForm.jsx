@@ -13,11 +13,11 @@ function SearchForm({ onSubmit }) {
   }
 
   return (
-    <Stack>
+    <Stack spacing={4}>
       <Form value={formValue} onChange={handleFormChange}>
-        <Input type="number" name="barcode" placeholder="Bardcode" align="middle" />
+        <Input type="number" name="barcode" placeholder="Bardcode" pattern="\d*" size="lg" autoFocus />
       </Form>
-      <Button leftIcon="search" onClick={handleSubmit} w="100%">Search</Button>
+      <Button leftIcon="search" onClick={handleSubmit} w="100%" size="lg">Search</Button>
     </Stack>
   );
 }

@@ -7,7 +7,7 @@ function Home() {
   const history = useHistory();
 
   async function handleSearchSubmit(event) {
-    history.push(`/products?barcode=${event.target.value}`);
+    history.push(`/search?barcode=${event.target.value}`);
   }
 
   return (

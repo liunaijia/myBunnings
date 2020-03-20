@@ -3,25 +3,37 @@ import {
   string, arrayOf, shape, number,
 } from 'prop-types';
 import { Link } from 'react-router-dom';
-import { Flex, Box } from './components';
+import {
+  Flex, StatArrow, Box, Stack, Image, Text,
+} from '@chakra-ui/core';
 
-function ProductList({ items, className }) {
+function ProductList({ items }) {
   return (
-    <Flex className={className} direction="column">
+    <Stack spacing={0}>
       {items.map(item => (
-        <Flex key={item.id}>
-          <img src={item.image} alt={item.name} flex="auto" />
+        <Box borderTopWidth="10px" key={item.id} as={Link} to={`/products/${item.id}`}>
           <Flex>
-            <Link dangerouslySetInnerHTML={{ __html: item.name_highlighted }} to={`/products/${item.id}`} />
-            <div>
-              {item.price}
-              {' '}
-              {item.priceDiff > 0 ? item.priceDiff : ''}
-            </div>
+            <Image src={item.image} alt={item.name} size="32" m={1} />
+            <Flex direction="column" justify="space-between" mt={4} mb={4}>
+              <Text dangerouslySetInnerHTML={{ __html: item.name_highlighted }} lineHeight="shorter" />
+              <Flex>
+                <Text color="red.500">
+                  {`$${item.price}`}
+                </Text>
+                {item.priceDiff < 0
+                && (
+                <Box as="span" ml={1}>
+                  {`was $${item.normalPrice}`}
+                  <StatArrow type="decrease" />
+                  {`${Math.round(item.priceDiff * -100 / item.normalPrice)}%`}
+                </Box>
+                )}
+              </Flex>
+            </Flex>
           </Flex>
-        </Flex>
+        </Box>
       ))}
-    </Flex>
+    </Stack>
   );
 }
 
@@ -29,12 +41,10 @@ ProductList.propTypes = {
   items: arrayOf(shape({
     name_highlighted: string, id: string, image: string, name: string, price: number, priceDiff: number,
   })),
-  className: string,
 };
 
 ProductList.defaultProps = {
   items: [],
-  className: undefined,
 };
 
 export default ProductList;
