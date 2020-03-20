@@ -4,7 +4,7 @@ import {
 } from 'prop-types';
 
 function Form({
-  value, onChange, children,
+  value, onChange, children, ...props
 }) {
   function handleChange(name) {
     return (event) => {
@@ -26,6 +26,7 @@ function Form({
     return React.cloneElement(child, {
       value: value[name],
       onChange: handleChange(name),
+      ...props,
     });
   });
 }
