@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { func, string } from 'prop-types';
 import {
   Icon, Input, InputGroup, InputLeftElement, Stack,
@@ -13,10 +13,19 @@ function SearchHeader({ onSubmit, query, sort }) {
     event.preventDefault();
     event.stopPropagation();
 
-    if (onSubmit && formValue) {
+    if (onSubmit) {
       onSubmit({ target: { value: formValue } });
     }
   }
+
+  useEffect(() => {
+    // submit search when sort changes
+    if (sort !== formValue.sort) {
+      if (onSubmit) {
+        onSubmit({ target: { value: formValue } });
+      }
+    }
+  }, [formValue.sort]);
 
   return (
     <Stack direction="row" position="sticky" top={0} bg="#4154b3" p={4} as="form" onSubmit={handleSubmit}>

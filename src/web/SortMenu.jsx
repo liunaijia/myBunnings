@@ -5,7 +5,7 @@ import {
 import { string, func } from 'prop-types';
 
 const sorts = {
-  null: 'Best match',
+  '': 'Best match',
   price: 'Price low to high',
   '-price': 'Price high to low',
   priceDiff: 'Discount',
