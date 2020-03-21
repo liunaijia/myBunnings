@@ -24,7 +24,7 @@ function SortMenu({ value, onChange }) {
   return (
     <Menu>
       <MenuButton as={Button} rightIcon="chevron-down">
-        {sorts[value]}
+        {sorts[value || '']}
       </MenuButton>
       <MenuList>
         {Object.entries(sorts).map(([sort, name]) => (
@@ -43,7 +43,7 @@ SortMenu.propTypes = {
 };
 
 SortMenu.defaultProps = {
-  value: null,
+  value: '',
   onChange: undefined,
 };
 
